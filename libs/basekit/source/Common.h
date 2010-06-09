@@ -80,6 +80,7 @@ typedef long long int64_t;
 
 // this also includes windows.h
 #include <winsock2.h>
+typedef SSIZE_T ssize_t;
 
 #if !defined(__MINGW32__)
 #if defined(BUILDING_BASEKIT_DLL) || defined(BUILDING_IOVMALL_DLL)

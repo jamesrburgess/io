@@ -83,8 +83,8 @@ DLL_SUFFIX := dll
 endif
 
 ifneq (,$(findstring Windows,$(SYS)))
-CC := cc
-#CC := cl -nologo
+#CC := cc
+CC := cl
 CCOUTFLAG :=-Fo
 WARN := 
 OPTIMIZE :=-Zi -MDd -D_USE_MATH_DEFINES -DWIN32 -D_DEBUG -D_CRT_SECURE_NO_DEPRECATE
@@ -99,7 +99,7 @@ LINKLIBFLAG := lib
 DLL_LIB_SUFFIX := .lib
 #DLL_LIB_PREFIX := lib
 #DLL_COMMAND := -link /INCREMENTAL:NO -subsystem:WINDOWS -machine:X86 -DLL $(DEF_FILE)
-DLL_COMMAND := -link /INCREMENTAL:NO -subsystem:WINDOWS -DLL $(DEF_FILE)
+DLL_COMMAND := -link /INCREMENTAL:NO -subsystem:WINDOWS -DLL $(DEF_FILE) -manifest
 DLL_SUFFIX := dll
 DLL_EXTRAS := ws2_32.lib shell32.lib
 FLAT_NAMESPACE :=
@@ -110,7 +110,7 @@ endif
 ### Special rules #################################################
 
 ifeq ($(shell [ -f Makefile.local ] && echo true),true)
-ALL_BEGIN := $(MAKE) -f Makefile.local CC=cc SYS=$(SYS) all_begin
+ALL_BEGIN := $(MAKE) -f Makefile.local CC=$(CC) SYS=$(SYS) all_begin
 ALL_END := $(MAKE) -f Makefile.local CC=$(CC) SYS=$(SYS) all_end
 MAKE_LOCAL_CLEAN := $(MAKE) -f Makefile.local SYS=$(SYS) CC=$(CC) clean
 else
